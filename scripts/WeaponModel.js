@@ -9,7 +9,7 @@ define(function (require) {
         this.strength = 5;
 
         this.modifiers = [
-            { factor: 2, against: 'Squishy' }
+            { factor: 2, target: 'Squishy' }
         ];
 
     }

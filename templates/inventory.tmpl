@@ -1,0 +1,58 @@
+<%
+/**
+ * Template for displaying the user's inventory.
+ *
+ * @param {PlayerModel} playerModel
+ */
+%>
+<table>
+    <tr>
+        <td>Position:</td>
+        <td><%= playerModel.x %>, <%= playerModel.y %></td>
+    </tr>
+
+    <tr>
+        <td>XP:</td>
+        <td><%= playerModel.xp %></td>
+    </tr>
+
+    <tr>
+        <td>Gold:</td>
+        <td><%= playerModel.gold %></td>
+    </tr>
+
+    <tr>
+        <td>Health:</td>
+        <td><%= playerModel.hitPoints %> / <%= playerModel.maxHitPoints %></td>
+    </tr>
+
+    <tr>
+        <td>Armor:</td>
+        <td><%= playerModel.armor === null ? 'None' : playerModel.armor.title %></td>
+    </tr>
+
+    <tr>
+        <td valign="top">Weapon:</td>
+        <td>
+            <%= playerModel.weapon.title %>
+            <% if (playerModel.weapon.modifiers.length > 0) { %>
+                <ul>
+                    <% playerModel.weapon.modifiers.forEach(function (modifier) { %>
+                        <li><%= modifier.factor %>x against <%= modifier.target %></li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign="top">Items:</td>
+        <td>
+            <ul>
+                <% playerModel.items.forEach(function (item) { %>
+                    <li><%= item.title %></li>
+                <% }); %>
+            </ul>
+        </td>
+    </tr>
+</table>

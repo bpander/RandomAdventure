@@ -14,7 +14,7 @@ define(function (require) {
     var sceneryData = require('json!../data/scenery.json');
 
     // Templates
-    var tableTemplate = tmpl(require('text!../templates/table.tmpl'));
+    var inventoryTemplate = tmpl(require('text!../templates/inventory.tmpl'));
 
 
     function AdventureGame () {
@@ -92,19 +92,7 @@ define(function (require) {
 
 
     AdventureGame.prototype.showInventory = function () {
-        var html = tableTemplate({
-            tableRows: [
-                [ 'Position:',  this.playerModel.x + ', ' + this.playerModel.y ],
-                [ 'XP:',        this.playerModel.xp ],
-                [ 'Gold:',      this.playerModel.gold ],
-                [ 'Health:',    this.playerModel.hitPoints + ' / ' + this.playerModel.maxHitPoints ],
-                [ 'Armor:',     this.playerModel.armor === null ? 'None' : this.playerModel.armor.title ],
-                [ 'Weapon:',    this.playerModel.weapon.title + ' (' + this.playerModel.weapon.modifiers[0].factor +'x against ' + this.playerModel.weapon.modifiers[0].against + ')' ],
-                [ 'Items:',     this.playerModel.items.map(function (item) {
-                                    return item.title;
-                                }).join(', ') ]
-            ]
-        });
+        var html = inventoryTemplate({ playerModel: this.playerModel });
         this.consoleView.appendOutput(html);
     };
 
