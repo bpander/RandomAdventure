@@ -1,6 +1,9 @@
 define(function (require) {
     'use strict';
 
+    // Libs
+    var tmpl = require('lib/tmpl');
+
     // Models
     var PlayerModel = require('PlayerModel');
 
@@ -9,6 +12,9 @@ define(function (require) {
 
     // Data
     var sceneryData = require('json!../data/scenery.json');
+
+    // Templates
+    var tableTemplate = tmpl(require('text!../templates/table.tmpl'));
 
 
     function AdventureGame () {
@@ -36,7 +42,9 @@ define(function (require) {
         NORTH: 'north',
         EAST: 'east',
         SOUTH: 'south',
-        WEST: 'west'
+        WEST: 'west',
+        INVENTORY: 'inventory',
+        INVENTORY_SHORTHAND: 'i'
     };
 
     AdventureGame.DIRECTION = {
@@ -74,7 +82,30 @@ define(function (require) {
                 this.movePlayer(command);
                 break;
 
+            case AdventureGame.COMMAND.INVENTORY:
+            case AdventureGame.COMMAND.INVENTORY_SHORTHAND:
+                this.showInventory();
+                break;
+
         }
+    };
+
+
+    AdventureGame.prototype.showInventory = function () {
+        var html = tableTemplate({
+            tableRows: [
+                [ 'Position:',  this.playerModel.x + ', ' + this.playerModel.y ],
+                [ 'XP:',        this.playerModel.xp ],
+                [ 'Gold:',      this.playerModel.gold ],
+                [ 'Health:',    this.playerModel.hitPoints + ' / ' + this.playerModel.maxHitPoints ],
+                [ 'Armor:',     this.playerModel.armor === null ? 'None' : this.playerModel.armor.title ],
+                [ 'Weapon:',    this.playerModel.weapon.title + ' (' + this.playerModel.weapon.modifiers[0].factor +'x against ' + this.playerModel.weapon.modifiers[0].against + ')' ],
+                [ 'Items:',     this.playerModel.items.map(function (item) {
+                                    return item.title;
+                                }).join(', ') ]
+            ]
+        });
+        this.consoleView.appendOutput(html);
     };
 
 

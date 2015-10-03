@@ -1,0 +1,9 @@
+<table>
+    <% tableRows.forEach(function (tableData) { %>
+        <tr>
+            <% tableData.forEach(function (tableDatum) { %>
+                <td><%= tableDatum %></td>
+            <% }); %>
+        </tr>
+    <% }); %>
+</table>

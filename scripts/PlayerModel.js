@@ -1,6 +1,8 @@
 define(function (require) {
     'use strict';
 
+    var WeaponModel = require('WeaponModel');
+
 
     function PlayerModel () {
 
@@ -10,15 +12,20 @@ define(function (require) {
 
         this.xp = 0;
 
-        this.maxHitPoints = 1;
+        this.gold = 10;
 
-        this.hitPoints = 1;
+        this.maxHitPoints = 10;
+
+        this.hitPoints = 10;
 
         this.armor = null;
 
-        this.weapon = null;
+        this.weapon = new WeaponModel();
 
-        this.items = [];
+        this.items = [
+            { title: 'Scientology leaflet', description: '' },
+            { title: 'Childlike sense of wonder', description: '' }
+        ];
 
         this.carryingCapacity = 100;
 
