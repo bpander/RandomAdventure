@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adventure</title>
+</head>
+<body>
+
+    <div class="js-consoleView">
+        <ul>
+            <li>&lt; Hello, 'move east'</li>
+        </ul>
+
+        <input type="text" />
+    </div>
+
+    <script src="bower_components/requirejs/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: 'scripts'
+        });
+
+        require(['main']);
+    </script>
+</body>
+</html>

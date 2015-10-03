@@ -1,0 +1,19 @@
+{
+  "name": "adventure",
+  "version": "0.0.0",
+  "authors": [
+    "Bradley Anderson <banderso@nerdery.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.20",
+    "EventEmitter.js": "~4.3.0"
+  }
+}
