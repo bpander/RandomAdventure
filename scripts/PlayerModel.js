@@ -8,7 +8,7 @@ define(function (require) {
 
         this.y = 0;
 
-        this.level = 1;
+        this.xp = 0;
 
         this.maxHitPoints = 1;
 

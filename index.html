@@ -7,7 +7,7 @@
 
     <div class="js-consoleView">
         <ul>
-            <li>&lt; Hello, 'move east'</li>
+            <li>&lt; Hello, enter the text 'move'</li>
         </ul>
 
         <input type="text" />
@@ -16,7 +16,12 @@
     <script src="bower_components/requirejs/require.js"></script>
     <script>
         require.config({
-            baseUrl: 'scripts'
+            baseUrl: 'scripts',
+
+            paths: {
+                json: '../bower_components/requirejs-json/json',
+                text: '../bower_components/requirejs-text/text'
+            }
         });
 
         require(['main']);

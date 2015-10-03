@@ -7,8 +7,8 @@ define(function (require) {
     // Views
     var ConsoleView = require('ConsoleView');
 
-    // Stores
-    var EventStore = require('stores/EventStore');
+    // Data
+    var sceneryData = require('json!../data/scenery.json');
 
 
     function AdventureGame () {
@@ -24,15 +24,19 @@ define(function (require) {
 
 
     var _random = function (x, y, modifier) {
-        x = (x * 17 & 0xff) + 1;
-        y = (y * 11 & 0xff) + 1;
+        x = (x * 19 & 0xff) + 1;
+        y = (y * 23 & 0xff) + 1;
         modifier = (modifier & 0xff) + 1;
         return 0.5 * Math.sin(modifier * x + y) + 0.5;
     };
 
 
     AdventureGame.COMMAND = {
-        MOVE: 'move'
+        MOVE: 'move',
+        NORTH: 'north',
+        EAST: 'east',
+        SOUTH: 'south',
+        WEST: 'west'
     };
 
     AdventureGame.DIRECTION = {
@@ -62,12 +66,26 @@ define(function (require) {
             case AdventureGame.COMMAND.MOVE:
                 this.movePlayer(messageParts[1]);
                 break;
+
+            case AdventureGame.COMMAND.NORTH:
+            case AdventureGame.COMMAND.EAST:
+            case AdventureGame.COMMAND.SOUTH:
+            case AdventureGame.COMMAND.WEST:
+                this.movePlayer(command);
+                break;
+
         }
     };
 
 
     AdventureGame.prototype.movePlayer = function (direction) {
         switch (direction) {
+
+            case AdventureGame.DIRECTION.NONE:
+                this.consoleView.appendOutput('Please choose a direction: ' + Object.keys(AdventureGame.DIRECTION).map(function (direction) {
+                    return AdventureGame.DIRECTION[direction];
+                }).join(', '));
+                return;
 
             case AdventureGame.DIRECTION.NORTH:
                 this.playerModel.y++;
@@ -86,7 +104,12 @@ define(function (require) {
                 break;
         }
 
-        this.consoleView.appendOutput(_random(this.playerModel.x, this.playerModel.y, 0));
+        var x = this.playerModel.x;
+        var y = this.playerModel.y;
+        var prefix = sceneryData.prefixes[Math.floor(_random(x, y, 0) * sceneryData.prefixes.length)];
+        var adjective = sceneryData.adjectives[Math.floor(_random(x, y, 1) * sceneryData.adjectives.length)];
+        var noun = sceneryData.nouns[Math.floor(_random(x, y, 2) * sceneryData.nouns.length)]
+        this.consoleView.appendOutput([ prefix, adjective, noun ].join(' '));
     };
 
 
