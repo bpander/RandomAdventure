@@ -1,0 +1,58 @@
+[
+    {
+        "type": "store",
+        "templates": [
+            "A SHOPKEEPER peddles his wares in <%= adjective %> <%= noun %>.",
+            "<%= adjective.charAt(0).toUpperCase() %><%= adjective.slice(1) %> <%= noun %> labelled with a \"Ye Olde Shoppe\" sign sits at the side of the road. The SHOPKEEPER bids you hey."
+        ],
+        "adjectives": [
+            "an old",
+            "a fairly new",
+            "a totally fetch"
+        ],
+        "nouns": [
+            "KIA SEDAN",
+            "milk monster CARCASS",
+            "one of those ye olde SHOPPE type places",
+            "building that you can tell used to be a TACO BELL"
+        ]
+    },
+    {
+        "type": "creature",
+        "templates": [
+            "There's <%= adjective %> <%= noun %> doin' his thang.",
+            "<%= adjective %> <%= noun %> prances through a clearing.",
+            "You see <%= adjective %> <%= noun %> just ahead."
+        ],
+        "adjectives": [
+            "a pretty average",
+            "a squishy",
+            "a fire",
+            "an ice",
+            "badass",
+            "an undead",
+            "an alpha overlord",
+            "a really tiny",
+            "an evil",
+            "an old, wise"
+        ],
+        "nouns": [
+            "MILKMONSTER",
+            "CATBEETLE",
+            "FORMER MEMBER OF THE MONKEES",
+            "FORK",
+            "JOY TAKER"
+        ]
+    },
+    {
+        "type": "nothing",
+        "templates": [
+            "You simply enjoy the view knowing the developer was too lazy to put anything for you to do here.",
+            "There's nothing else.",
+            "That's it.",
+            "It's eerily quiet so you move with caution."
+        ],
+        "adjectives": [""],
+        "nouns": [""]
+    }
+]

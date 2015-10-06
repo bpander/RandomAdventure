@@ -12,6 +12,7 @@ define(function (require) {
 
     // Data
     var sceneryData = require('json!../data/scenery.json');
+    var eventData = require('json!../data/event.json');
 
     // Templates
     var inventoryTemplate = tmpl(require('text!../templates/inventory.tmpl'));
@@ -30,9 +31,9 @@ define(function (require) {
 
 
     var _random = function (x, y, modifier) {
-        x = (x * 19 & 0xff) + 1;
-        y = (y * 23 & 0xff) + 1;
-        modifier = (modifier & 0xff) + 1;
+        x = (x * 23 & 0xff) + 1;
+        y = (y * 19 & 0xff) + 1;
+        modifier = (modifier * 17 & 0xff) + 1;
         return 0.5 * Math.sin(modifier * x + y) + 0.5;
     };
 
@@ -44,7 +45,12 @@ define(function (require) {
         SOUTH: 'south',
         WEST: 'west',
         INVENTORY: 'inventory',
-        INVENTORY_SHORTHAND: 'i'
+        INVENTORY_SHORTHAND: 'i',
+        WOO: 'woo',
+        ENSLAVE: 'enslave',
+        DOMESTICATE: 'domesticate',
+        PET: 'pet',
+        TALK: 'talk'
     };
 
     AdventureGame.DIRECTION = {
@@ -127,8 +133,14 @@ define(function (require) {
         var y = this.playerModel.y;
         var prefix = sceneryData.prefixes[Math.floor(_random(x, y, 0) * sceneryData.prefixes.length)];
         var adjective = sceneryData.adjectives[Math.floor(_random(x, y, 1) * sceneryData.adjectives.length)];
-        var noun = sceneryData.nouns[Math.floor(_random(x, y, 2) * sceneryData.nouns.length)]
-        this.consoleView.appendOutput([ prefix, adjective, noun ].join(' '));
+        var noun = sceneryData.nouns[Math.floor(_random(x, y, 2) * sceneryData.nouns.length)];
+        var eventType = eventData[Math.floor(_random(x, y, 3) * eventData.length)];
+        var eventTemplate = eventType.templates[Math.floor(_random(x, y, 4) * eventType.templates.length)];
+        var eventText = tmpl(eventTemplate, {
+            adjective: eventType.adjectives[Math.floor(_random(x, y, 5) * eventType.adjectives.length)],
+            noun: eventType.nouns[Math.floor(_random(x, y, 6) * eventType.nouns.length)]
+        });
+        this.consoleView.appendOutput([ prefix, adjective, noun ].join(' ') + ' ' + eventText);
     };
 
 

@@ -1,6 +1,6 @@
 {
     "prefixes": [
-        "You come accross",
+        "You come across",
         "You enter",
         "You find yourself before"
     ],
@@ -14,11 +14,11 @@
     ],
 
     "nouns": [
-        "valley",
-        "mountain",
-        "town",
-        "castle",
-        "forest",
-        "battlefield"
+        "valley.",
+        "mountain.",
+        "town.",
+        "castle.",
+        "forest.",
+        "battlefield."
     ]
 }

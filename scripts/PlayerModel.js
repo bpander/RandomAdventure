@@ -22,6 +22,8 @@ define(function (require) {
 
         this.weapon = new WeaponModel();
 
+        this.charisma = 1;
+
         this.items = [
             { title: 'Scientology leaflet', description: '' },
             { title: 'Childlike sense of wonder', description: '' }
